@@ -85,14 +85,14 @@ body {
     background: #2F2F32;
 }
 
-.timeline__marker {
+.timeline__indicator {
     position: absolute;
-    top: 40px;
-    left: 35%;
+    top: -15px;
+    left: calc(35% - 3px);
     display: block;
-    width: 4px;
+    background: url('../images/timeline-indicator.png') 0 0 no-repeat;
+    width: 6px;
     height: 4px;
-    background-color: #fff;
 }
 
 .timeline__container {
@@ -108,7 +108,7 @@ body {
 }
 
 
-.timeline__item {
+.timeline__marker {
     position: relative;
     margin: 0 4em;
     display: block;
@@ -121,7 +121,7 @@ body {
     will-change: transform;
     transition: transform 0.3s cubic-bezier(0,0,0.3,1);
 }
-.timeline__item::after {
+.timeline__marker::after {
     content: '';
     position: absolute;
     display: block;
@@ -136,9 +136,9 @@ body {
     transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
 }
 
-.timeline__item--hit {
+.timeline__marker--hit {
     transform: scale(1.8);
 }
-.timeline__item--hit::after {
+.timeline__marker--hit::after {
     opacity: 1;
 }

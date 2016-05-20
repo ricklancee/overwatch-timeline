@@ -2,17 +2,15 @@ class Timeline {
 
     constructor() {
         this.container = document.querySelector('.timeline__container');
-        this.markers = document.querySelectorAll('.timeline__item');
+        this.markers = document.querySelectorAll('.timeline__marker');
         this.minimap = document.querySelector('.timeline__minimap');
         this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
         this.minimapMakerContainer = document.querySelector('.timeline__minimap__markers');
 
         this.onScroll = this.onScroll.bind(this);
-
         this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
-
         this.update = this.update.bind(this);
 
         this.targetX = 0;
@@ -33,9 +31,8 @@ class Timeline {
         [].forEach.call(this.markers, (marker) => {
             const width = marker.offsetWidth / 2;
             const left = marker.offsetLeft;
-            const middle = (left + width) - 2 // 2 = timeline__marker width;
-            const percentage = (middle * 100) / this.maxX;
-            this.markerPositions.push(percentage);
+            const position = left + width;
+            this.markerPositions.push(position);
         });
         this.markersLength = this.markerPositions.length;
 
@@ -57,12 +54,13 @@ class Timeline {
 
         // Tmp click check.
         this.container.addEventListener('click', (evt) => {
-            if (!evt.target.classList.contains('timeline__item')) {
+            if (!evt.target.classList.contains('timeline__marker')) {
                 return;
             }
 
-            this.targetX = evt.target.offsetLeft + 14;
-            this.scrollPercent = ((evt.target.offsetLeft + 14) * 100) / this.maxX;;
+            this.targetX = evt.target.offsetLeft + 7;
+            console.log('go to', this.targetX);
+            this.scrollPercent = (this.targetX * 100) / this.maxX;;
         });
     }
 
@@ -125,10 +123,10 @@ class Timeline {
 
         // Todo: refactor
         for (var i = 0; i < this.markersLength; i++) {
-            if (this.scrollPercent > this.markerPositions[i]) {
-                this.markers[i].classList.add('timeline__item--hit');
-            } else if (this.scrollPercent < this.markerPositions[i]) {
-                this.markers[i].classList.remove('timeline__item--hit');
+            if (this.targetX >= this.markerPositions[i]) {
+                this.markers[i].classList.add('timeline__marker--hit');
+            } else if (this.targetX <= this.markerPositions[i]) {
+                this.markers[i].classList.remove('timeline__marker--hit');
             }
         }
 
@@ -138,10 +136,10 @@ class Timeline {
 
     createMinimapMarkers() {
         for (var i = 0; i < this.markersLength; i++) {
-            const markerPercentage = this.markerPositions[i];
+            const markerPercentage = (this.markerPositions[i] * 100) / this.maxX;
             const targetX = (markerPercentage * this.minimapWidth) / 100;
 
-            this.minimapMakerContainer.innerHTML += `<div class="timeline__minimap__marker" style="transform: translateX(${targetX}px)"></div>`;
+            this.minimapMakerContainer.innerHTML += `<div class="timeline__minimap__marker" style="transform: translateX(${targetX - 1}px)"></div>`;
         }
     }
 
