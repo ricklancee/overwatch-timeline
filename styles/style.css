@@ -93,6 +93,12 @@ body {
     background: url('../images/timeline-indicator.png') 0 0 no-repeat;
     width: 6px;
     height: 4px;
+    will-change: tranform;
+    transition: transform 0.3s cubic-bezier(0,0,0.3,1);
+}
+
+.timeline__indicator--onMark {
+    transform: translateY(-3px);
 }
 
 .timeline__container {
@@ -122,6 +128,11 @@ body {
     transition: transform 0.3s cubic-bezier(0,0,0.3,1);
     cursor: pointer;
 }
+
+.timeline__marker:hover {
+    border-color: #a2a2a2;
+}
+
 .timeline__marker::after {
     content: '';
     position: absolute;

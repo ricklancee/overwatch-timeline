@@ -131,7 +131,8 @@ class Timeline {
             const markerPercentage = (this.markerPositions[i] * 100) / this.maxX;
             const targetX = (markerPercentage * this.minimapWidth) / 100;
 
-            this.minimapMarkerContainer.innerHTML += `<div class="timeline__minimap__marker" style="transform: translateX(${targetX - 1}px)"></div>`;
+            this.minimapMarkerContainer.innerHTML += `<div class="timeline__minimap__marker"
+                style="transform: translateX(${targetX - 1}px)"></div>`;
         }
     }
 
