@@ -6,7 +6,7 @@ class Timeline {
         this.markers = document.querySelectorAll('.timeline__marker');
         this.minimap = document.querySelector('.timeline__minimap');
         this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
-        this.minimapMakerContainer = document.querySelector('.timeline__minimap__markers');
+        this.minimapMarkerContainer = document.querySelector('.timeline__minimap__markers');
 
         // Binds the `this` value of the methods value to the class instance
         // instead of the event target.
@@ -131,7 +131,7 @@ class Timeline {
             const markerPercentage = (this.markerPositions[i] * 100) / this.maxX;
             const targetX = (markerPercentage * this.minimapWidth) / 100;
 
-            this.minimapMakerContainer.innerHTML += `<div class="timeline__minimap__marker" style="transform: translateX(${targetX - 1}px)"></div>`;
+            this.minimapMarkerContainer.innerHTML += `<div class="timeline__minimap__marker" style="transform: translateX(${targetX - 1}px)"></div>`;
         }
     }
 
