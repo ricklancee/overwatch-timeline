@@ -89,7 +89,12 @@ class Timeline {
     update() {
         requestAnimationFrame(this.update);
 
-        // Todo: refactor
+        this.updateTimeline();
+        this.updateMinimap();
+        this.checkIfAnyMarkersWereHit();
+    }
+
+    checkIfAnyMarkersWereHit() {
         for (var i = 0; i < this.markersLength; i++) {
             if (this.targetX >= this.markerPositions[i]) {
                 this.markers[i].classList.add('timeline__marker--hit');
@@ -97,9 +102,6 @@ class Timeline {
                 this.markers[i].classList.remove('timeline__marker--hit');
             }
         }
-
-        this.updateTimeline();
-        this.updateMinimap();
     }
 
     createMinimapMarkers() {
