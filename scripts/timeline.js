@@ -36,7 +36,6 @@ class Timeline {
         });
         this.markersLength = this.markerPositions.length;
 
-
         console.log('Marker positions', this.markerPositions);
 
         this.createMinimapMarkers();
@@ -61,6 +60,16 @@ class Timeline {
             this.targetX = evt.target.offsetLeft + 7;
             console.log('go to', this.targetX);
             this.scrollPercent = (this.targetX * 100) / this.maxX;;
+        });
+
+        document.addEventListener('keyup', (evt) => {
+            if (evt.keyCode == 39) { // right
+                evt.preventDefault();
+                this.goToNextMaker();
+            } else if (evt.keyCode == 37) { // left
+                evt.preventDefault();
+                this.goToPreviousMaker();
+            }
         });
     }
 
@@ -162,6 +171,56 @@ class Timeline {
         } else {
             this.container.style.transform = `translateX(${-this.currentX}px)`;
         }
+    }
+
+    goToNextMaker() {
+        // figure out next marker.
+        let nextFound = false;
+
+        for (let i = 0; i < this.markersLength; i++) {
+            const markerPosition = this.markerPositions[i];
+
+            if (markerPosition > Math.ceil(this.targetX)) {
+                nextFound = markerPosition;
+                break;
+            }
+        }
+
+        console.log('go to', nextFound);
+
+        if (!nextFound) {
+            this.targetX = this.maxX;
+            return;
+        }
+
+        // Set the target position
+        this.targetX = nextFound;
+        this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
+    }
+
+    goToPreviousMaker() {
+        // figure out next marker.
+        let previousFound = false;
+
+        for (let i = 0; i < this.markersLength; i++) {
+            const markerPosition = this.markerPositions[i];
+
+            if (markerPosition < Math.ceil(this.targetX)) {
+                previousFound = markerPosition;
+            }
+        }
+
+        console.log('go to', previousFound);
+
+        if (!previousFound) {
+            this.targetX = 0;
+            return;
+        }
+
+        // Set the target position
+        this.targetX = previousFound;
+        this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
+
     }
 }
 
