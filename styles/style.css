@@ -120,6 +120,7 @@ body {
     transform: scale(1);
     will-change: transform;
     transition: transform 0.3s cubic-bezier(0,0,0.3,1);
+    cursor: pointer;
 }
 .timeline__marker::after {
     content: '';
