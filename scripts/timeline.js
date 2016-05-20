@@ -2,11 +2,14 @@ class Timeline {
 
     constructor() {
         this.container = document.querySelector('.timeline__container');
+        this.timelineIndicator = document.querySelector('.timeline__indicator');
         this.markers = document.querySelectorAll('.timeline__marker');
         this.minimap = document.querySelector('.timeline__minimap');
         this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
         this.minimapMakerContainer = document.querySelector('.timeline__minimap__markers');
 
+        // Binds the `this` of the methods value to the class instance
+        // instead of the event target.
         this.onScroll = this.onScroll.bind(this);
         this.handleMarkerClick = this.handleMarkerClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
@@ -29,13 +32,15 @@ class Timeline {
         this.createMinimapMarkers();
 
         this.addEventListeners();
+
+        // Start off the game loop.
         requestAnimationFrame(this.update);
     }
 
     addEventListeners() {
         document.addEventListener('mousewheel', this.onScroll);
-        this.container.addEventListener('click', this.handleMarkerClick);
         document.addEventListener('keydown', this.onKeyDown);
+        this.container.addEventListener('click', this.handleMarkerClick);
     }
 
     getMarkerPositions() {
@@ -81,7 +86,7 @@ class Timeline {
             return;
         }
 
-        // Todo: Adding evt.deltaX might be buggy
+        // Adding evt.deltaX might be buggy
         this.targetX += (evt.deltaY + evt.deltaX) * 0.3;
         this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
     }
@@ -96,9 +101,12 @@ class Timeline {
 
     checkIfAnyMarkersWereHit() {
         for (var i = 0; i < this.markersLength; i++) {
-            if (this.targetX >= this.markerPositions[i]) {
+            const currentPosition = this.markerPositions[i];
+            const minMargin = currentPosition - 7;
+
+            if (this.targetX >= minMargin) {
                 this.markers[i].classList.add('timeline__marker--hit');
-            } else if (this.targetX <= this.markerPositions[i]) {
+            } else if (this.targetX <= minMargin) {
                 this.markers[i].classList.remove('timeline__marker--hit');
             }
         }
@@ -114,12 +122,18 @@ class Timeline {
     }
 
     updateMinimap() {
-        const targetX = (this.scrollPercent * this.minimapWidth) / 100;
+        let targetX = (this.scrollPercent * this.minimapWidth) / 100;
+
+        if (targetX < 0)
+            targetX = 0;
+
+        if (targetX > this.minimapWidth)
+            targetX = this.minimapWidth;
+
         this.minimapCurrentX += (targetX - this.minimapCurrentX) / 6;
         this.minimapIndicator.style.transform = `translateX(${this.minimapCurrentX}px)`;
     }
 
-    // Scrolls the timeline to the target targetX;
     updateTimeline() {
         this.currentX += (this.targetX - this.currentX) / 6;
 
@@ -135,7 +149,6 @@ class Timeline {
     }
 
     goToNextMaker() {
-        // figure out next marker.
         let nextFound = false;
 
         for (let i = 0; i < this.markersLength; i++) {
@@ -154,12 +167,10 @@ class Timeline {
             return;
         }
 
-        // Set the target position
         this.setTarget(nextFound);
     }
 
     goToPreviousMaker() {
-        // figure out next marker.
         let previousFound = false;
 
         for (let i = 0; i < this.markersLength; i++) {
