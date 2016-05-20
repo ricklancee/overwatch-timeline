@@ -62,13 +62,13 @@ class Timeline {
             this.scrollPercent = (this.targetX * 100) / this.maxX;;
         });
 
-        document.addEventListener('keyup', (evt) => {
-            if (evt.keyCode == 39) { // right
-                evt.preventDefault();
+        document.addEventListener('keydown', (evt) => {
+            if (evt.keyCode === 39) { // right
                 this.goToNextMaker();
-            } else if (evt.keyCode == 37) { // left
                 evt.preventDefault();
+            } else if (evt.keyCode === 37) { // left
                 this.goToPreviousMaker();
+                evt.preventDefault();
             }
         });
     }
@@ -220,7 +220,6 @@ class Timeline {
         // Set the target position
         this.targetX = previousFound;
         this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
-
     }
 }
 
