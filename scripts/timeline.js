@@ -2,7 +2,10 @@ class Timeline {
 
     constructor() {
         this.container = document.querySelector('.timeline__container');
-        this.markers = this.container.querySelectorAll('.timeline__item');
+        this.markers = document.querySelectorAll('.timeline__item');
+        this.minimap = document.querySelector('.timeline__minimap');
+        this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
+        this.minimapMakerContainer = document.querySelector('.timeline__minimap__markers');
 
         this.onScroll = this.onScroll.bind(this);
         this.update = this.update.bind(this);
@@ -13,17 +16,24 @@ class Timeline {
         this.maxX = this.container.offsetWidth;
         this.minX = 0;
 
+        this.minimapWidth = this.minimap.offsetWidth;
+        this.minimapCurrentX = 0;
+
         // Todo: refacor
         this.markerPositions = [];
         [].forEach.call(this.markers, (marker) => {
             const width = marker.offsetWidth / 2;
             const left = marker.offsetLeft;
-            const middle = left + width;
-            this.markerPositions.push(middle-2); // 2 = timeline__marker width;
+            const middle = (left + width) - 2 // 2 = timeline__marker width;
+            const percentage = (middle * 100) / this.maxX;
+            this.markerPositions.push(percentage);
         });
+        this.markersLength = this.markerPositions.length;
+
 
         console.log('Marker positions', this.markerPositions);
 
+        this.createMinimapMarkers();
 
         this.addEventListeners();
         requestAnimationFrame(this.update);
@@ -36,10 +46,13 @@ class Timeline {
         this.container.addEventListener('click', _ => {
             if (this.targetX == this.maxX) {
                 this.targetX = this.minX;
+                this.scrollPercent = 0
             } else if (this.targetX == this.minX) {
                 this.targetX = this.maxX;
+                this.scrollPercent = 100;
             } else {
                 this.targetX = this.maxX;
+                this.scrollPercent = 100;
             }
         });
     }
@@ -66,15 +79,31 @@ class Timeline {
         requestAnimationFrame(this.update);
 
         // Todo: refactor
-        for (var i = 0; i < this.markerPositions.length; i++) {
-            if (this.currentX > this.markerPositions[i]) {
+        for (var i = 0; i < this.markersLength; i++) {
+            if (this.scrollPercent > this.markerPositions[i]) {
                 this.markers[i].classList.add('timeline__item--hit');
-            } else if (this.currentX < this.markerPositions[i]) {
+            } else if (this.scrollPercent < this.markerPositions[i]) {
                 this.markers[i].classList.remove('timeline__item--hit');
             }
         }
 
         this.scrollTimeline();
+        this.updateMinimap();
+    }
+
+    createMinimapMarkers() {
+        for (var i = 0; i < this.markersLength; i++) {
+            const markerPercentage = this.markerPositions[i];
+            const targetX = (markerPercentage * this.minimapWidth) / 100;
+
+            this.minimapMakerContainer.innerHTML += `<div class="timeline__minimap__marker" style="transform: translateX(${targetX}px)"></div>`;
+        }
+    }
+
+    updateMinimap() {
+        const targetX = (this.scrollPercent * this.minimapWidth) / 100;
+        this.minimapCurrentX += (targetX - this.minimapCurrentX) / 6;
+        this.minimapIndicator.style.transform = `translateX(${this.minimapCurrentX}px)`;
     }
 
     // Scrolls the timeline to the target targetX;
