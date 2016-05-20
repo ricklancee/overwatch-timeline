@@ -21,14 +21,7 @@ class Timeline {
         this.minimapWidth = this.minimap.offsetWidth;
         this.minimapCurrentX = 0;
 
-        // Todo: refacor
-        this.markerPositions = [];
-        [].forEach.call(this.markers, (marker) => {
-            const width = marker.offsetWidth / 2;
-            const left = marker.offsetLeft;
-            const position = left + width;
-            this.markerPositions.push(position);
-        });
+        this.markerPositions = this.getMarkerPositions();
         this.markersLength = this.markerPositions.length;
 
         console.log('Marker positions', this.markerPositions);
@@ -43,6 +36,18 @@ class Timeline {
         document.addEventListener('mousewheel', this.onScroll);
         this.container.addEventListener('click', this.handleMarkerClick);
         document.addEventListener('keydown', this.onKeyDown);
+    }
+
+    getMarkerPositions() {
+        let positions = [];
+        [].forEach.call(this.markers, (marker) => {
+            const width = marker.offsetWidth / 2;
+            const left = marker.offsetLeft;
+            const position = left + width;
+            positions.push(position);
+        });
+
+        return positions;
     }
 
     handleMarkerClick(evt) {
