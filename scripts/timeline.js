@@ -8,6 +8,8 @@ class Timeline {
         this.minimapMakerContainer = document.querySelector('.timeline__minimap__markers');
 
         this.onScroll = this.onScroll.bind(this);
+        this.handleMarkerClick = this.handleMarkerClick.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
         this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
@@ -46,31 +48,29 @@ class Timeline {
 
     addEventListeners() {
         document.addEventListener('mousewheel', this.onScroll);
-
         document.addEventListener('touchmove', this.onTouchMove);
         document.addEventListener('touchstart', this.onTouchStart);
         document.addEventListener('touchend', this.onTouchEnd);
+        this.container.addEventListener('click', this.handleMarkerClick);
+        document.addEventListener('keydown', this.onKeyDown);
+    }
 
-        // Tmp click check.
-        this.container.addEventListener('click', (evt) => {
-            if (!evt.target.classList.contains('timeline__marker')) {
-                return;
-            }
+    handleMarkerClick(evt) {
+        if (!evt.target.classList.contains('timeline__marker')) {
+            return;
+        }
 
-            this.targetX = evt.target.offsetLeft + 7;
-            console.log('go to', this.targetX);
-            this.scrollPercent = (this.targetX * 100) / this.maxX;;
-        });
+        this.setTarget(evt.target.offsetLeft + 7);
+    }
 
-        document.addEventListener('keydown', (evt) => {
-            if (evt.keyCode === 39) { // right
-                this.goToNextMaker();
-                evt.preventDefault();
-            } else if (evt.keyCode === 37) { // left
-                this.goToPreviousMaker();
-                evt.preventDefault();
-            }
-        });
+    onKeyDown(evt) {
+        if (evt.keyCode === 39) { // right
+            this.goToNextMaker();
+            evt.preventDefault();
+        } else if (evt.keyCode === 37) { // left
+            this.goToPreviousMaker();
+            evt.preventDefault();
+        }
     }
 
     onScroll(evt) {
@@ -189,13 +189,12 @@ class Timeline {
         console.log('go to', nextFound);
 
         if (!nextFound) {
-            this.targetX = this.maxX;
+            this.setTarget(this.maxX);
             return;
         }
 
         // Set the target position
-        this.targetX = nextFound;
-        this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
+        this.setTarget(nextFound);
     }
 
     goToPreviousMaker() {
@@ -213,13 +212,16 @@ class Timeline {
         console.log('go to', previousFound);
 
         if (!previousFound) {
-            this.targetX = 0;
+            this.setTarget(0);
             return;
         }
 
-        // Set the target position
-        this.targetX = previousFound;
-        this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
+        this.setTarget(previousFound);
+    }
+
+    setTarget(target) {
+        this.targetX = target;
+        this.scrollPercent = Math.floor((target * 100) / this.maxX);
     }
 }
 
