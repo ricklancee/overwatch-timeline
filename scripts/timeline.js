@@ -8,7 +8,7 @@ class Timeline {
         this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
         this.minimapMakerContainer = document.querySelector('.timeline__minimap__markers');
 
-        // Binds the `this` of the methods value to the class instance
+        // Binds the `this` value of the methods value to the class instance
         // instead of the event target.
         this.onScroll = this.onScroll.bind(this);
         this.handleMarkerClick = this.handleMarkerClick.bind(this);
@@ -26,6 +26,7 @@ class Timeline {
 
         this.markerPositions = this.getMarkerPositions();
         this.markersLength = this.markerPositions.length;
+        this.onMark = false;
 
         console.log('Marker positions', this.markerPositions);
 
@@ -100,9 +101,22 @@ class Timeline {
     }
 
     checkIfAnyMarkersWereHit() {
-        for (var i = 0; i < this.markersLength; i++) {
+        for (let i = 0; i < this.markersLength; i++) {
             const currentPosition = this.markerPositions[i];
             const minMargin = currentPosition - 7;
+            const maxMargin = currentPosition + 7;
+
+            if (this.targetX >= minMargin && this.targetX <= maxMargin) {
+                this.timelineIndicator.classList.add('timeline__indicator--onMark');
+                this.onMark = currentPosition;
+            }
+
+            if (
+                this.onMark == currentPosition &&
+                (this.targetX < minMargin || this.targetX > maxMargin)
+            ) {
+                this.timelineIndicator.classList.remove('timeline__indicator--onMark');
+            }
 
             if (this.targetX >= minMargin) {
                 this.markers[i].classList.add('timeline__marker--hit');
@@ -113,7 +127,7 @@ class Timeline {
     }
 
     createMinimapMarkers() {
-        for (var i = 0; i < this.markersLength; i++) {
+        for (let i = 0; i < this.markersLength; i++) {
             const markerPercentage = (this.markerPositions[i] * 100) / this.maxX;
             const targetX = (markerPercentage * this.minimapWidth) / 100;
 
