@@ -10,9 +10,6 @@ class Timeline {
         this.onScroll = this.onScroll.bind(this);
         this.handleMarkerClick = this.handleMarkerClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
-        this.onTouchStart = this.onTouchStart.bind(this);
-        this.onTouchMove = this.onTouchMove.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
         this.update = this.update.bind(this);
 
         this.targetX = 0;
@@ -23,10 +20,6 @@ class Timeline {
 
         this.minimapWidth = this.minimap.offsetWidth;
         this.minimapCurrentX = 0;
-
-        this.startTouchX = 0;
-        this.currentTouchX = 0;
-        this.touchXMoved = 0;
 
         // Todo: refacor
         this.markerPositions = [];
@@ -48,9 +41,6 @@ class Timeline {
 
     addEventListeners() {
         document.addEventListener('mousewheel', this.onScroll);
-        document.addEventListener('touchmove', this.onTouchMove);
-        document.addEventListener('touchstart', this.onTouchStart);
-        document.addEventListener('touchend', this.onTouchEnd);
         this.container.addEventListener('click', this.handleMarkerClick);
         document.addEventListener('keydown', this.onKeyDown);
     }
@@ -89,42 +79,6 @@ class Timeline {
         // Todo: Adding evt.deltaX might be buggy
         this.targetX += (evt.deltaY + evt.deltaX) * 0.3;
         this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
-    }
-
-    onTouchStart(evt) {
-        this.startTouchX = evt.touches[0].pageX;
-        this.currentTouchX = this.startTouchX;
-
-        console.log('touch start', this.startTouchX);
-        console.log('touch start', this.currentTouchX);
-
-        evt.preventDefault();
-    }
-
-    onTouchMove(evt) {
-        this.currentTouchX = evt.touches[0].pageX;
-        this.touchXMoved = this.currentTouchX - this.startTouchX;
-
-        if (this.targetX < this.minX) {
-            this.targetX = this.minX;
-            return;
-        }
-
-        if (this.targetX > this.maxX) {
-            this.targetX = this.maxX;
-            return;
-        }
-
-
-        this.targetX += this.touchXMoved * 0.1;
-        this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
-
-        console.log('touch moving', this.touchXMoved);
-    }
-
-    onTouchEnd(evt) {
-        this.touchXMoved = 0;
-        console.log('touch ended');
     }
 
     update() {
