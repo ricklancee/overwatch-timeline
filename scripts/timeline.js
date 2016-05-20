@@ -106,16 +106,18 @@ class Timeline {
             const minMargin = currentPosition - 7;
             const maxMargin = currentPosition + 7;
 
-            if (this.targetX >= minMargin && this.targetX <= maxMargin) {
-                this.timelineIndicator.classList.add('timeline__indicator--onMark');
+            if (!this.onMark && this.targetX >= minMargin && this.targetX <= maxMargin) {
                 this.onMark = currentPosition;
+                this.timelineIndicator.classList.remove('timeline__indicator--onMark');
             }
 
             if (
+                this.onMark !== false &&
                 this.onMark == currentPosition &&
                 (this.targetX < minMargin || this.targetX > maxMargin)
             ) {
                 this.timelineIndicator.classList.remove('timeline__indicator--onMark');
+                this.onMark = false;
             }
 
             if (this.targetX >= minMargin) {
