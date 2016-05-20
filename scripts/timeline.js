@@ -55,18 +55,14 @@ class Timeline {
         document.addEventListener('touchstart', this.onTouchStart);
         document.addEventListener('touchend', this.onTouchEnd);
 
-        // Tmp fun.
-        this.container.addEventListener('click', _ => {
-            if (this.targetX == this.maxX) {
-                this.targetX = this.minX;
-                this.scrollPercent = 0
-            } else if (this.targetX == this.minX) {
-                this.targetX = this.maxX;
-                this.scrollPercent = 100;
-            } else {
-                this.targetX = this.maxX;
-                this.scrollPercent = 100;
+        // Tmp click check.
+        this.container.addEventListener('click', (evt) => {
+            if (!evt.target.classList.contains('timeline__item')) {
+                return;
             }
+
+            this.targetX = evt.target.offsetLeft + 14;
+            this.scrollPercent = ((evt.target.offsetLeft + 14) * 100) / this.maxX;;
         });
     }
 
