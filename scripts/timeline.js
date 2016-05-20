@@ -87,7 +87,7 @@ class Timeline {
             }
         }
 
-        this.scrollTimeline();
+        this.updateTimeline();
         this.updateMinimap();
     }
 
@@ -107,7 +107,7 @@ class Timeline {
     }
 
     // Scrolls the timeline to the target targetX;
-    scrollTimeline() {
+    updateTimeline() {
         this.currentX += (this.targetX - this.currentX) / 6;
 
         if (this.currentX <= this.minX) {
