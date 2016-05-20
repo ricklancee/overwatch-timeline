@@ -1,0 +1,114 @@
+:root {
+    /** Main variables */
+    --main-bg-color: #131314;
+    --main-copy-font: 'Arial', sans-serif;
+    --main-copy-color: #9F9F9F;
+    --main-heading-font: 'BigNoodleTitling', 'Arial', sans-serif;
+    --main-heading-color: #FFF;
+
+
+    /** Hero variables */
+    --hero-reinhardt-color: #FDC816;
+    --hero-reinhardt-icon: '../images/heroes/reinhardt-icon.png';
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--main-bg-color);
+    background: url('../images/bg.jpg') center 0 no-repeat;
+    color: var(--main-copy-color);
+    font-family: var(--main-copy-font);
+    text-align: center;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.timeline {
+    position: relative;
+    width: 100vw;
+}
+
+.timeline__container::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 7px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2F2F32;
+}
+
+.timeline__marker {
+    position: absolute;
+    top: 40px;
+    left: 35%;
+    display: block;
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+}
+
+
+.timeline__container {
+    position: absolute;
+    top: 0;
+    left: 35%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    width: 1850px;
+    will-change: transform;
+}
+
+
+.timeline__item {
+    position: relative;
+    margin: 0 4em;
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    border: 2px solid #7A8289;
+    transform: scale(1);
+    will-change: transform;
+    transition: transform 0.3s cubic-bezier(0,0,0.3,1);
+}
+.timeline__item::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: -2px;
+    left: -2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    background: #fff;
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
+}
+
+.timeline__item--hit {
+    transform: scale(1.8);
+}
+.timeline__item--hit::after {
+    opacity: 1;
+}
