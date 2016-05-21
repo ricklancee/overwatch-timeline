@@ -58,12 +58,16 @@ class Timeline {
     }
 
     handleMarkerClick(evt) {
-        console.log('TODO: Fix CLICKS');
-        // if (!evt.target.classList.contains('marker__icon')) {
-        //     return;
-        // }
+        if (!evt.target.classList.contains('marker__icon')) {
+            return;
+        }
 
-        // this.setTarget(evt.target.offsetLeft + (this.markerWidth / 2));
+        for (var i = 0; i < evt.path.length; i++) {
+            if(evt.path[i].classList.contains('timeline__item')) {
+                this.setTarget(evt.path[i].offsetLeft + (evt.path[i].offsetWidth / 2));
+                break;
+            }
+        }
     }
 
     onKeyDown(evt) {
@@ -112,6 +116,7 @@ class Timeline {
                 this.onMark = currentPosition;
                 this.timelineIndicator.classList.remove('timeline__indicator--onMark');
                 this.markers[i].classList.add('timeline__marker--hit');
+                this.markers[i].classList.add('timeline__marker--wasHit');
             }
 
             if (
