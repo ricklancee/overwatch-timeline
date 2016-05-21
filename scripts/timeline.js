@@ -16,12 +16,6 @@ class Timeline {
         this.onKeyDown = this.onKeyDown.bind(this);
         this.update = this.update.bind(this);
 
-        this.targetX = 0;
-        this.currentX = 0;
-        this.scrollPercent = 0;
-        this.maxX = this.container.offsetWidth;
-        this.minX = 0;
-
         this.minimapWidth = this.minimap.offsetWidth;
         this.minimapCurrentX = 0;
 
@@ -29,6 +23,14 @@ class Timeline {
         this.markersLength = this.markerPositions.length;
         this.onMark = false;
         this.markerWidth = this.markers[0].offsetWidth;
+
+        this.lastMarker = this.markerPositions[this.markersLength-1];
+
+        this.targetX = 0;
+        this.currentX = 0;
+        this.scrollPercent = 0;
+        this.maxX = this.lastMarker;
+        this.minX = 0;
 
         this.createMinimapMarkers();
 
