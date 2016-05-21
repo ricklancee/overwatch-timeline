@@ -30,8 +30,6 @@ class Timeline {
         this.onMark = false;
         this.markerWidth = this.markers[0].offsetWidth;
 
-        console.log('Marker positions', this.markerPositions);
-
         this.createMinimapMarkers();
 
         this.addEventListeners();
@@ -190,8 +188,6 @@ class Timeline {
             }
         }
 
-        console.log('go to', nextFound);
-
         if (!nextFound) {
             this.setTarget(this.maxX);
             return;
@@ -210,8 +206,6 @@ class Timeline {
                 previousFound = markerPosition;
             }
         }
-
-        console.log('go to', previousFound);
 
         if (!previousFound) {
             this.setTarget(0);
