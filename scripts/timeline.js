@@ -3,7 +3,7 @@ class Timeline {
     constructor() {
         this.container = document.querySelector('.timeline__container');
         this.timelineIndicator = document.querySelector('.timeline__indicator');
-        this.markers = document.querySelectorAll('.timeline__marker');
+        this.markers = document.querySelectorAll('.timeline__marker:not(.timeline__marker--decade)');
         this.minimap = document.querySelector('.timeline__minimap');
         this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
         this.minimapMarkerContainer = document.querySelector('.timeline__minimap__markers');
@@ -58,11 +58,12 @@ class Timeline {
     }
 
     handleMarkerClick(evt) {
-        if (!evt.target.classList.contains('timeline__marker')) {
-            return;
-        }
+        console.log('TODO: Fix CLICKS');
+        // if (!evt.target.classList.contains('marker__icon')) {
+        //     return;
+        // }
 
-        this.setTarget(evt.target.offsetLeft + (this.markerWidth / 2));
+        // this.setTarget(evt.target.offsetLeft + (this.markerWidth / 2));
     }
 
     onKeyDown(evt) {

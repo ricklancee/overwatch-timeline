@@ -1,15 +1,15 @@
 @font-face {
     font-family: 'BigNoodleTitling';
-    src: url('../fonts/bignoodle_titling/big_noodle_titling.woff2') format('woff2'),
-         url('../fonts/bignoodle_titling/big_noodle_titling.woff') format('woff');
+    src: url('fonts/bignoodle_titling/big_noodle_titling.woff2') format('woff2'),
+         url('fonts/bignoodle_titling/big_noodle_titling.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'BigNoodleTitling';
-    src: url('../fonts/bignoodle_titling/big_noodle_titling_oblique.woff2') format('woff2'),
-         url('../fonts/bignoodle_titling/big_noodle_titling_oblique.woff') format('woff');
+    src: url('fonts/bignoodle_titling/big_noodle_titling_oblique.woff2') format('woff2'),
+         url('fonts/bignoodle_titling/big_noodle_titling_oblique.woff') format('woff');
     font-weight: normal;
     font-style: italic;
 }
@@ -64,7 +64,7 @@ p {
 
 .container {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 150px);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -146,7 +146,7 @@ p {
 .timeline__item {
     max-width: 338px;
     margin: 0 2em;
-    color: var(--marker-color);
+    color: var(--marker-color, #fff);
 }
 
 .timeline__marker {
@@ -158,10 +158,19 @@ p {
     cursor: pointer;
 }
 
+.timeline__marker--decade::before {
+    content: '';
+    display: block;
+    margin: 5px auto 0 auto;
+    width: 1px;
+    height: 20px;
+    background-color: #979797;
+}
+
 .marker__icon {
     width: 30px;
     height: 30px;
-    background-image: var(--hero-reinhardt-icon);
+    background-image: var(--marker-icon);
     background-size: contain;
 }
 
