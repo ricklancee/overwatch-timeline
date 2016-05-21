@@ -12,6 +12,7 @@ class Timeline {
         // instead of the event target.
         this.onScroll = this.onScroll.bind(this);
         this.handleMarkerClick = this.handleMarkerClick.bind(this);
+        this.handleMinimapClick = this.handleMinimapClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.update = this.update.bind(this);
 
@@ -43,6 +44,7 @@ class Timeline {
         document.addEventListener('mousewheel', this.onScroll);
         document.addEventListener('keydown', this.onKeyDown);
         this.container.addEventListener('click', this.handleMarkerClick);
+        this.minimap.addEventListener('click', this.handleMinimapClick);
     }
 
     getMarkerPositions() {
@@ -68,6 +70,14 @@ class Timeline {
                 break;
             }
         }
+    }
+
+    handleMinimapClick(evt) {
+        const percentage = (evt.layerX * 100) / this.minimapWidth;
+
+        const target = (percentage * this.maxX) / 100
+
+        this.setTarget(target);
     }
 
     onKeyDown(evt) {
