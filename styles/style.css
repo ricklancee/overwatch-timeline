@@ -1,34 +1,66 @@
+@font-face {
+    font-family: 'BigNoodleTitling';
+    src: url('../fonts/bignoodle_titling/big_noodle_titling.woff2') format('woff2'),
+         url('../fonts/bignoodle_titling/big_noodle_titling.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BigNoodleTitling';
+    src: url('../fonts/bignoodle_titling/big_noodle_titling_oblique.woff2') format('woff2'),
+         url('../fonts/bignoodle_titling/big_noodle_titling_oblique.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
 :root {
-    /** Main variables */
     --main-bg-color: #131314;
+
+    --main-font-family: 'BigNoodleTitling', 'Arial', sans-serif;
+    --main-font-color: #FFF;
     --main-copy-font: 'Arial', sans-serif;
     --main-copy-color: #9F9F9F;
-    --main-heading-font: 'BigNoodleTitling', 'Arial', sans-serif;
-    --main-heading-color: #FFF;
 
-
-    /** Hero variables */
     --hero-reinhardt-color: #FDC816;
-    --hero-reinhardt-icon: '../images/heroes/reinhardt-icon.png';
+    --hero-reinhardt-icon: url(http://127.0.0.1:8080/images/icons/reinhardt-icon.png);
+}
+
+.hero--reinhardt {
+    --marker-color: var(--hero-reinhardt-color);
+    --marker-icon: var(--hero-reinhardt-icon);
 }
 
 * {
     box-sizing: border-box;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    margin: 0;
-}
-
 body {
     padding: 0;
     margin: 0;
     background: url('../images/bg.jpg') center 0 no-repeat;
-    background-color: var(--main-bg-color);
-    color: var(--main-copy-color);
+    background-color: #131314;
     font-family: var(--main-copy-font);
+    color: var(--main-copy-color);
+    line-height: 1.225;
     text-align: center;
 }
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    font-family: var(--main-font-family);
+    color: var(--main-font-color);
+    font-style: italic;
+    font-weight: normal;
+    letter-spacing: 0.050rem;
+
+}
+p {
+    margin: 0;
+}
+
+
+/** TIMELINE */
 
 .container {
     width: 100vw;
@@ -42,6 +74,21 @@ body {
 .timeline {
     position: relative;
     width: 100vw;
+}
+.timeline__indicator {
+    position: absolute;
+    top: -15px;
+    left: calc(35% - 3px);
+    display: block;
+    background: url('../images/timeline-indicator.png') 0 0 no-repeat;
+    background-size: contain;
+    width: 6px;
+    height: 4px;
+    will-change: tranform;
+    transition: transform 0.3s cubic-bezier(0,0,0.3,1);
+}
+.timeline__indicator--onMark {
+    transform: translateY(-3px);
 }
 
 .timeline__minimap {
@@ -73,34 +120,6 @@ body {
     border-radius: 2px;
     background: #6F6F6F;
 }
-
-.timeline__container::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #2F2F32;
-}
-
-.timeline__indicator {
-    position: absolute;
-    top: -15px;
-    left: calc(35% - 3px);
-    display: block;
-    background: url('../images/timeline-indicator.png') 0 0 no-repeat;
-    width: 6px;
-    height: 4px;
-    will-change: tranform;
-    transition: transform 0.3s cubic-bezier(0,0,0.3,1);
-}
-
-.timeline__indicator--onMark {
-    transform: translateY(-3px);
-}
-
 .timeline__container {
     position: absolute;
     top: 0;
@@ -113,44 +132,41 @@ body {
     will-change: transform;
 }
 
+.timeline__container::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 14px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2F2F32;
+}
+
+.timeline__item {
+    max-width: 338px;
+    margin: 0 2em;
+    color: var(--marker-color);
+}
 
 .timeline__marker {
     position: relative;
-    margin: 0 4em;
+    margin: 0 auto;
     display: block;
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    border: 2px solid #7A8289;
-    background-color: #131314;
-    transform: scale(1);
-    will-change: transform;
-    transition: transform 0.3s cubic-bezier(0,0,0.3,1);
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
 
-.timeline__marker:hover {
-    border-color: #a2a2a2;
+.marker__icon {
+    width: 30px;
+    height: 30px;
+    background-image: var(--hero-reinhardt-icon);
+    background-size: contain;
 }
 
-.timeline__marker::after {
-    content: '';
-    position: absolute;
-    display: block;
-    top: -2px;
-    left: -2px;
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    background: #fff;
-    opacity: 0;
-    will-change: opacity;
-    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
-}
-
-.timeline__marker--hit {
-    transform: scale(1.8);
-}
-.timeline__marker--hit::after {
-    opacity: 1;
+.marker__date {
+    font-family: var(--main-font-family);
+    font-size: 13px;
+    letter-spacing: 0.05em;
 }

@@ -27,6 +27,7 @@ class Timeline {
         this.markerPositions = this.getMarkerPositions();
         this.markersLength = this.markerPositions.length;
         this.onMark = false;
+        this.markerWidth = this.markers[0].offsetWidth;
 
         console.log('Marker positions', this.markerPositions);
 
@@ -61,7 +62,7 @@ class Timeline {
             return;
         }
 
-        this.setTarget(evt.target.offsetLeft + 7);
+        this.setTarget(evt.target.offsetLeft + (this.markerWidth / 2));
     }
 
     onKeyDown(evt) {
@@ -103,12 +104,13 @@ class Timeline {
     checkIfAnyMarkersWereHit() {
         for (let i = 0; i < this.markersLength; i++) {
             const currentPosition = this.markerPositions[i];
-            const minMargin = currentPosition - 7;
-            const maxMargin = currentPosition + 7;
+            const minMargin = currentPosition - (this.markerWidth / 2);
+            const maxMargin = currentPosition + (this.markerWidth / 2);
 
             if (!this.onMark && this.targetX >= minMargin && this.targetX <= maxMargin) {
                 this.onMark = currentPosition;
                 this.timelineIndicator.classList.remove('timeline__indicator--onMark');
+                this.markers[i].classList.add('timeline__marker--hit');
             }
 
             if (
@@ -117,13 +119,8 @@ class Timeline {
                 (this.targetX < minMargin || this.targetX > maxMargin)
             ) {
                 this.timelineIndicator.classList.remove('timeline__indicator--onMark');
-                this.onMark = false;
-            }
-
-            if (this.targetX >= minMargin) {
-                this.markers[i].classList.add('timeline__marker--hit');
-            } else if (this.targetX <= minMargin) {
                 this.markers[i].classList.remove('timeline__marker--hit');
+                this.onMark = false;
             }
         }
     }
