@@ -174,6 +174,9 @@ h1,h2,h3,h4,h5,h6 {
 p {
     margin: 0;
 }
+a {
+    color: inherit;
+}
 
 .site-header {
     text-align: center;
@@ -192,9 +195,59 @@ p {
     height: 60px;
 }
 
+.attribution {
+    position: absolute;
+    right: 15px;
+    bottom: 7px;
+    color: #fff;
+    color: #59595A;
+    text-align: right;
+    font-family: var(--main-copy-font);
+    font-size: 8px;
+}
+
+.author {
+    display: flex;
+    color: #fff;
+    opacity: 0.6;
+    position: absolute;
+    bottom: -30px;
+    left: 16px;
+}
+.author img {
+    width: 43px;
+    height: 53px;
+    margin-right: 10px;
+}
+.author .madeby {
+    font-size: 14px;
+    font-family: var(--main-font-family);
+}
+.author .title,
+.author .discord  {
+    opacity: 0;
+}
+
+.author .title {
+    font-size: 14px;
+    font-family: var(--main-font-family);
+}
+.author .discord {
+    font-size: 10px;
+    font-family: var(--main-copy-color);
+}
+
+.author:hover {
+    transform: translateY(-30px);
+}
+.author:hover .title,
+.author:hover .discord  {
+    opacity: 1;
+}
+
 /** TIMELINE */
 .container {
-    margin-top: 100px;
+    margin-top: 70px;
     width: 100vw;
     text-align: center;
 }
@@ -260,7 +313,7 @@ p {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 18200px;
+    width: 18000px;
     will-change: transform;
 }
 .timeline__container::after {
@@ -269,7 +322,7 @@ p {
     z-index: -1;
     top: 14px;
     left: 0;
-    width: 100%;
+    width: calc(100% - 260px);;
     height: 2px;
     background: #2F2F32;
 }
@@ -452,7 +505,6 @@ p {
     font-family: var(--main-font-family);
     color: #fff;
 }
-
 
 .timeline__item--present .timeline__description {
     margin-top: 12px;
