@@ -228,6 +228,7 @@ p {
     height: 4px;
     border-radius: 2px;
     background-color: #2F2F32;
+    cursor: pointer;
 }
 .timeline__minimap__indicator {
     position: absolute;
@@ -245,7 +246,15 @@ p {
     top: -1px;
     width: 1px;
     height: 6px;
-    background: #6F6F6F;
+    background-color: #6F6F6F;
+    transform: scale(5);
+}
+.timeline__minimap__marker:hover {
+    background-color: #A2A2A2;
+    width: 4px;
+    height: 12px;
+    top: -4px;
+    left: -1px;
 }
 .timeline__container {
     position: absolute;
@@ -316,6 +325,28 @@ p {
     height: 20px;
     background-color: #979797;
 }
+
+.timeline__marker--present::before {
+    content: '';
+    display: block;
+    margin: 30px auto 0 auto;
+    width: 1px;
+    height: 100px;
+    background-color: #3C3C3C;
+}
+.timeline__marker--present::after {
+    content: 'Present Day';
+    position: absolute;
+    left: -35px;
+    width: 100px;
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-family: var(--main-font-family);
+    font-style: italic;
+    color: #404040;
+}
+
 
 .marker__icon {
     position: relative;
@@ -420,4 +451,12 @@ p {
 
     font-family: var(--main-font-family);
     color: #fff;
+}
+
+
+.timeline__item--present .timeline__description {
+    margin-top: 12px;
+}
+.timeline__item--present .marker__icon::after {
+    display: none;
 }
