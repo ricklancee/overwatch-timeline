@@ -189,7 +189,6 @@ class Timeline {
         }
 
         if (!nextFound) {
-            this.setTarget(this.maxX);
             return;
         }
 
