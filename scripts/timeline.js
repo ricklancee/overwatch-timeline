@@ -109,7 +109,7 @@ class Timeline {
         }
 
         // Adding evt.deltaX might be buggy
-        this.targetX += (evt.deltaY + evt.deltaX) * 0.3;
+        this.targetX += Math.floor((evt.deltaY + evt.deltaX) * 0.3);
         this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
     }
 
@@ -222,7 +222,7 @@ class Timeline {
     }
 
     setTarget(target) {
-        this.targetX = target;
+        this.targetX = Math.floor(target);
         this.scrollPercent = Math.floor((target * 100) / this.maxX);
     }
 
