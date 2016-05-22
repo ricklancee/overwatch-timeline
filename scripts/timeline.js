@@ -111,6 +111,12 @@ class Timeline {
             return;
         }
 
+        if ( event.wheelDelta ) { // WebKit / Opera / Explorer 9
+            console.log('good browser');
+        } else if ( event.detail ) { // Firefox
+            console.log('bad browser');
+        }
+
         console.log(evt.deltaY);
 
         // Adding evt.deltaX might be buggy
