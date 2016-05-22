@@ -285,10 +285,10 @@ a {
 
 .timeline__minimap {
     position: absolute;
-    bottom: 25px;
+    bottom: 45px;
     left: 50%;
-    width: 300px;
-    margin-left: -150px;
+    width: 450px;
+    margin-left: -225px;
     height: 4px;
     border-radius: 2px;
     background-color: #2F2F32;
