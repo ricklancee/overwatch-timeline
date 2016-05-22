@@ -99,6 +99,7 @@ class Timeline {
         }
     }
 
+    // http://phrogz.net/js/wheeldelta.html
     wheelDistance(evt) {
         if (!evt) evt = event;
         var w=evt.wheelDelta, d=evt.detail;
