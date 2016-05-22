@@ -293,6 +293,7 @@ a {
     border-radius: 2px;
     background-color: #2F2F32;
     cursor: pointer;
+    z-index: 10;
 }
 .timeline__minimap__indicator {
     position: absolute;
