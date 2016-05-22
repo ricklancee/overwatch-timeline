@@ -1,10 +1,19 @@
 {
   "name": "timeline",
   "version": "0.0.0",
+  "scripts": {
+    "babel": "./node_modules/.bin/babel --presets=es2015 scripts/timeline.js --out-file scripts/timeline-es5.js",
+    "autoprefixer": "./node_modules/.bin/postcss --use autoprefixer styles/style.css -o styles/style-dist.css",
+    "cssmin": "./node_modules/.bin/cleancss -o styles/style-dist.css styles/style-dist.css",
+    "uglify": "./node_modules/.bin/uglifyjs scripts/timeline-es5.js -m -o scripts/timeline-es5.js",
+    "build": "npm run babel && npm run autoprefixer && npm run cssmin && npm run uglify"
+  },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-cli": "^6.0.0",
     "babel-preset-es2015": "^6.9.0",
-    "postcss-cli": "^2.5.2"
+    "clean-css": "^3.4.12",
+    "postcss-cli": "^2.5.2",
+    "uglify-js": "^2.6.2"
   }
 }

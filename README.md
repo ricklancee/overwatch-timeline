@@ -1,10 +1,8 @@
-# timeline
-
-Scripts are written in ES2015 and CSS use variables and, as such, require direct browser support. You can transpile scripts with BabelJS and css with PostCSS:
+# An Overwatch Lore Timeline
 
 ```bash
-./node_modules/.bin/babel --presets=es2015 scripts/timeline.js --out-file scripts/timeline-es5.js
-./node_modules/.bin/postcss --use autoprefixer styles/style-dist.css -o styles/style-dist.css
+npm install # instal dev depedencies once.
+npm run build
 ```
 
 ### Attribution & thanks
