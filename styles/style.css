@@ -325,7 +325,7 @@ a {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 18000px;
+    width: 18300px;
     will-change: transform;
 }
 .timeline__container::after {
@@ -334,7 +334,7 @@ a {
     z-index: -1;
     top: 14px;
     left: 0;
-    width: calc(100% - 260px);;
+    width: calc(100% - 560px);
     height: 2px;
     background: #2F2F32;
 }
@@ -531,7 +531,7 @@ a {
 
 .timeline__end {
     width: 860px;
-    right: -590px;
+    right: -290px;
     display: flex;
     opacity: 0;
     z-index: -1;
