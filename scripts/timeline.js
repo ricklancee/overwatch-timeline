@@ -76,8 +76,12 @@ class Timeline {
     }
 
     handleMinimapClick(evt) {
-        const percentage = (evt.layerX * 100) / this.minimapWidth;
+        const clickedX = evt.pageX;
 
+        const leftX = this.minimap.getBoundingClientRect().left;
+        const targetX = clickedX - leftX;
+
+        const percentage = (targetX * 100) / this.minimapWidth;
         const target = (percentage * this.maxX) / 100
 
         this.setTarget(target);
