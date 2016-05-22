@@ -98,26 +98,8 @@ class Timeline {
         }
     }
 
-    // http://phrogz.net/js/wheeldelta.html
-    wheelDistance(evt) {
-        if (!evt) evt = event;
-        var w=evt.wheelDelta, d=evt.detail;
-        if (d){
-        if (w) return w/d/40*d>0?1:-1;
-        else return -d/3;
-        } else return w/120;
-    }
-
-    wheelDirection (evt){
-      if (!evt) evt = event;
-      return (evt.detail<0) ? 1 : (evt.wheelDelta>0) ? 1 : -1;
-    }
-
     onScroll(evt) {
         evt.preventDefault();
-
-        const distance = -this.wheelDistance(evt);
-        const direction = this.wheelDirection(evt);
 
         if (this.targetX < this.minX) {
             this.targetX = this.minX;
@@ -129,8 +111,10 @@ class Timeline {
             return;
         }
 
+        consle.log(evt.deltaX);
+
         // Adding evt.deltaX might be buggy
-        this.targetX += Math.floor(distance * 10);
+        this.targetX += Math.floor(evt.deltaX);
         this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
     }
 
