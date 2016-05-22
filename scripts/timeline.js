@@ -111,9 +111,9 @@ class Timeline {
             return;
         }
 
-        if ( event.wheelDelta ) { // WebKit / Opera / Explorer 9
+        if ( evt.wheelDelta ) { // WebKit / Opera / Explorer 9
             console.log('good browser');
-        } else if ( event.detail ) { // Firefox
+        } else if ( evt.detail ) { // Firefox
             console.log('bad browser');
         }
 
