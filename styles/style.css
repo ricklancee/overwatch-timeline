@@ -100,7 +100,7 @@
     --marker-color: #FDC816;
     --marker-icon: url(http://ricklancee.github.io/overwatch-timeline/images/icons/overwatch-icon.png);
 }
-.timeline__item--bastion {
+.timeline__item--bastion, .bastion-bastion-bastion {
     --marker-color: #A9FFFF;
     --marker-icon: url(http://ricklancee.github.io/overwatch-timeline/images/icons/bastion-icon.png);
 }
@@ -338,7 +338,7 @@ a {
     height: 2px;
     background: #2F2F32;
 }
-.timeline__starttext {
+.timeline__start {
     position: absolute;
     height: 30px;
     left: 0;
@@ -350,6 +350,12 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+.timeline__end {
+    position: absolute;
+    height: 30px;
+    right: 0;
+    top: 0;
 }
 
 .timeline__container__item-container {
@@ -523,4 +529,71 @@ a {
 }
 .timeline__item--present .marker__icon::after {
     display: none;
+}
+
+.timeline__end {
+    width: 860px;
+    right: -590px;
+    display: flex;
+    opacity: 0;
+    z-index: -1;
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
+    transition-delay: 0.8s;
+}
+.timeline__end.show {
+    opacity: 1;
+}
+.timeline__end:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 14px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2F2F32;
+}
+
+.bastion-bastion-bastion {
+    margin: 0 5px;
+}
+.bastion-bastion-bastion:first-child {
+    margin-left: 200px;
+}
+
+.bastion__description {
+    margin-top: 12px;
+    position: relative;
+}
+.bastion__title {
+    margin-top: 5px;
+    font-size: 10px;
+    color: var(--marker-color);
+    font-style: italic;
+}
+.bastion__indicator {
+    display: block;
+    width: 7px;
+    height: 7px;
+    margin: 0 auto;
+    background: url('../images/description-indicator.png') 0 0 no-repeat;
+    background-size: contain;
+}
+.bastion__marker {
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    width: 30px;
+    height: 30px;
+    color: var(--marker-color, #fff);
+
+}
+.bastion__icon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-image: var(--marker-icon);
+    background-size: contain;
+    background-repeat: no-repeat;
 }

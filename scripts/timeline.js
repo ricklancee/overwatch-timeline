@@ -32,8 +32,11 @@ class Timeline {
         this.maxX = this.lastMarker;
         this.minX = 0;
 
-        this.createMinimapMarkers();
+        this.bastionSequence = '38384040373937396665';
+        this.enteredSequence = '';
+        this.sequenceTimer;
 
+        this.createMinimapMarkers();
         this.addEventListeners();
 
         // Start off the game loop.
@@ -81,6 +84,8 @@ class Timeline {
     }
 
     onKeyDown(evt) {
+        this.bastion(evt);
+
         if (evt.keyCode === 39) { // right
             this.goToNextMaker();
             evt.preventDefault();
@@ -219,6 +224,28 @@ class Timeline {
     setTarget(target) {
         this.targetX = target;
         this.scrollPercent = Math.floor((target * 100) / this.maxX);
+    }
+
+    bastion(evt) {
+        this.enteredSequence += evt.keyCode;
+
+        if (
+            this.enteredSequence.indexOf('38') > -1 &&
+            this.bastionSequence.indexOf((evt.keyCode + '')) > -1
+        ) {
+            window.clearTimeout(this.sequenceTimer);
+            this.sequenceTimer = window.setTimeout(_ => {
+                this.enteredSequence = '';
+                this.sequenceTimer = null;
+            }, 2000);
+        }
+
+        if (this.enteredSequence.match(this.bastionSequence)) {
+            window.clearTimeout(this.sequenceTimer);
+            this.setTarget(this.maxX);
+            document.querySelector('.timeline__end').classList.add('show');
+            this.enteredSequence = '';
+        }
     }
 }
 
