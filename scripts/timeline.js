@@ -3,7 +3,7 @@ class Timeline {
     constructor() {
         this.container = document.querySelector('.timeline__container');
         this.timelineIndicator = document.querySelector('.timeline__indicator');
-        this.markers = document.querySelectorAll('.timeline__marker:not(.timeline__marker--decade)');
+        this.markers = document.querySelectorAll('.timeline__marker:not(.timeline__marker--ignore)');
         this.minimap = document.querySelector('.timeline__minimap');
         this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
         this.minimapMarkerContainer = document.querySelector('.timeline__minimap__markers');

@@ -250,13 +250,24 @@ a {
 .container {
     margin-top: 70px;
     width: 100vw;
+    height: calc(100vh - 225px);
     text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.v-aligner {
+    height: 100%;
+    width: 100%;
 }
 
 .timeline {
     position: relative;
     width: 100vw;
+    height: 440px;
 }
+
 .timeline__indicator {
     position: absolute;
     top: -15px;
