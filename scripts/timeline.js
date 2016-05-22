@@ -111,7 +111,7 @@ class Timeline {
             return;
         }
 
-        consle.log(evt.deltaX);
+        console.log(evt.deltaX);
 
         // Adding evt.deltaX might be buggy
         this.targetX += Math.floor(evt.deltaX);
