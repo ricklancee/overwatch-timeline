@@ -111,16 +111,7 @@ class Timeline {
             return;
         }
 
-        if ( evt.wheelDelta ) { // WebKit / Opera / Explorer 9
-            console.log('good browser');
-        } else if ( evt.detail ) { // Firefox
-            console.log('bad browser');
-        }
-
-        console.log(evt.deltaY);
-
-        // Adding evt.deltaX might be buggy
-        this.targetX += Math.floor(evt.deltaY);
+        this.targetX += Math.floor(evt.deltaY + evt.deltaX);
         this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
     }
 
