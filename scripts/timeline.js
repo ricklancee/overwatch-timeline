@@ -67,11 +67,10 @@ class Timeline {
             return;
         }
 
-        for (var i = 0; i < evt.path.length; i++) {
-            if(evt.path[i].classList.contains('timeline__item')) {
-                this.setTarget(evt.path[i].offsetLeft + (evt.path[i].offsetWidth / 2));
-                break;
-            }
+        const parent = evt.target.closest('.timeline__item');
+        if (parent) {
+            this.setTarget(parent.offsetLeft + (parent.offsetWidth / 2));
+            return;
         }
     }
 
