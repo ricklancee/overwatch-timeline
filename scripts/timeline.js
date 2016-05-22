@@ -44,7 +44,7 @@ class Timeline {
     }
 
     addEventListeners() {
-        document.addEventListener('mousewheel', this.onScroll);
+        document.addEventListener('wheel', this.onScroll);
         document.addEventListener('keydown', this.onKeyDown);
         this.container.addEventListener('click', this.handleMarkerClick);
         this.minimap.addEventListener('click', this.handleMinimapClick);
