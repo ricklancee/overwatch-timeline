@@ -111,10 +111,10 @@ class Timeline {
             return;
         }
 
-        console.log(evt.deltaX);
+        console.log(evt.deltaY);
 
         // Adding evt.deltaX might be buggy
-        this.targetX += Math.floor(evt.deltaX);
+        this.targetX += Math.floor(evt.deltaY);
         this.scrollPercent = Math.floor((this.targetX * 100) / this.maxX);
     }
 
