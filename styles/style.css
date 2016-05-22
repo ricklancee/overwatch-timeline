@@ -16,7 +16,6 @@
 
 :root {
     --main-bg-color: #131314;
-
     --main-font-family: 'BigNoodleTitling', 'Arial', sans-serif;
     --main-font-color: #E6E6F1;
     --main-copy-font: 'Arial', sans-serif;
@@ -417,7 +416,6 @@ a {
     font-style: italic;
     color: #404040;
 }
-
 
 .marker__icon {
     position: relative;
