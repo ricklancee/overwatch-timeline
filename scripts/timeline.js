@@ -8,8 +8,8 @@ class Timeline {
         this.minimapIndicator = document.querySelector('.timeline__minimap__indicator');
         this.minimapMarkerContainer = document.querySelector('.timeline__minimap__markers');
 
-        // Binds the `this` value of the methods value to the class instance
-        // instead of the event target.
+        // Binds `this` of the methods to the class instance
+        // instead of the event target. i.e. Makes `this` refer to the class instance.
         this.onScroll = this.onScroll.bind(this);
         this.handleMarkerClick = this.handleMarkerClick.bind(this);
         this.handleMinimapClick = this.handleMinimapClick.bind(this);
