@@ -245,7 +245,6 @@ class Timeline {
             if (!this.onMark && this.targetX >= minMargin && this.targetX <= maxMargin) {
                 // geef aan dat we op een marker zitten.
                 this.onMark = currentPosition;
-                this.timelineIndicator.classList.add('timeline__indicator--onMark');
                 this.markers[i].classList.add('timeline__marker--hit');
                 this.markers[i].classList.add('timeline__marker--wasHit');
             }
