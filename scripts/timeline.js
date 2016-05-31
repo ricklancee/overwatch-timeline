@@ -3,6 +3,10 @@
 // Animation tip: Lerp, https://codepen.io/rachsmith/post/animation-tip-lerp
 // https://developer.mozilla.org/en-US/docs/Web/API gebruikt voor api documentatie.
 
+// Voer the code onder strict mode, voorkomt "stomme bugs"
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+"use strict";
+
 // Wrap alle code in een class om code netjes te organiseren
 // onder een namespace en conflicten met andere coden te verkomen.
 class Timeline {
@@ -50,7 +54,7 @@ class Timeline {
         // Easter egg.
         this.bastionSequence = '38384040373937396665';
         this.enteredSequence = '';
-        this.sequenceTimer;
+        this.sequenceTimer = null;
 
         this.createMinimapMarkers();
         this.addEventListeners();
@@ -140,7 +144,7 @@ class Timeline {
 
         // Op basis van het percentage, bereken waar dit in pixels is
         // op de tijdlijn.
-        const target = (percentage * this.maxX) / 100
+        const target = (percentage * this.maxX) / 100;
 
         this.setTarget(target);
     }
@@ -333,7 +337,7 @@ class Timeline {
             this.bastionSequence.indexOf((evt.keyCode + '')) > -1
         ) {
             window.clearTimeout(this.sequenceTimer);
-            this.sequenceTimer = window.setTimeout(_ => {
+            this.sequenceTimer = window.setTimeout(() => {
                 this.enteredSequence = '';
                 this.sequenceTimer = null;
             }, 2000);
@@ -350,4 +354,5 @@ class Timeline {
     }
 }
 
-window.addEventListener('load', _ => { new Timeline() });
+// Voer de code uit pas al de pagina klaar is met laden.
+window.addEventListener('load', () => { new Timeline(); });

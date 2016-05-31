@@ -1,5 +1,7 @@
 # An Overwatch Lore Timeline
 
+A prototype timeline for the game overwatch.
+
 ```bash
 npm install # instal dev depedencies once.
 npm run build
@@ -7,7 +9,7 @@ npm run build
 
 ### Attribution & thanks
 
-Blizzard Entertainment for this awesome game!   
+Blizzard Entertainment for the game!   
 https://playoverwatch.com  
 http://overwatch.gamepedia.com  
 http://overwatch.wikia.com/  
