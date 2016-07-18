@@ -1,6 +1,6 @@
 # An Overwatch Lore Timeline
 
-A prototype timeline for the game overwatch.
+A prototype timeline for the game overwatch. **Currently works best in chrome.**
 
 ```bash
 npm install # instal dev depedencies once.
